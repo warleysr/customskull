@@ -1,0 +1,7 @@
+name: CustomSkull
+version: 1.0.0
+main: customskull.CustomSkull
+author: zDubsCrazy
+commands:
+  customskull:
+    description: Comando para custom skulls
