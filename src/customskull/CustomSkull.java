@@ -8,9 +8,11 @@ import java.util.Base64;
 import java.util.Scanner;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -101,7 +103,12 @@ public class CustomSkull extends JavaPlugin {
 		return true;
 	}
 	
-	private ItemStack getSkull(String url) {
+	public static ItemStack getSkullById(String id) {
+		FileConfiguration cfg = Bukkit.getPluginManager().getPlugin("CustomSkull").getConfig();
+		return getSkull(cfg.getString(id));
+	}
+	
+	public static ItemStack getSkull(String url) {
         ItemStack skull = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
         
         if (url == null || url.isEmpty())
@@ -133,7 +140,7 @@ public class CustomSkull extends JavaPlugin {
         return skull;
     }
 	
-	private String getUUID(String nick) {
+	public static String getUUID(String nick) {
 		try {
 			InputStream stream = new URL(UUID_URL + nick).openStream();
 			
@@ -151,7 +158,7 @@ public class CustomSkull extends JavaPlugin {
 		}
 	}
 	
-	private String getTexture(String uuid) {
+	public static String getTexture(String uuid) {
 		try {
 			InputStream stream = new URL(TEXTURE_URL + uuid).openStream();
 			
